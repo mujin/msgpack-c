@@ -1,3 +1,9 @@
+# 2024-06-24 version 6.0.2
+  * Fix header file installation to respect `CMAKE_INSTALL_INCLUDEDIR` (#1125)
+  * Support absolute path for `CMAKE_INSTALL_*DIR` (#1121)
+  * Removed invalid ctest option. (#1120)
+  * Support relative path for `CMAKE_INSTALL_*DIR{ (#1119)
+
 # 2024-04-02 version 6.0.1
   * Improve CI environment (#1061, #1091, #1109)
   * Improve build system (#1060, #1069, #1108)
