@@ -137,7 +137,6 @@ int msgpack_object_init(msgpack_object* d, void *data, size_t size, int type)
         }
     case MSGPACK_OBJECT_BIN:
         {
-            d->type = type;
             d->via.bin.ptr = (char *)data;
             d->via.bin.size = size;
             break;
