@@ -125,6 +125,46 @@ int msgpack_pack_object(msgpack_packer* pk, msgpack_object d)
     }
 }
 
+int msgpack_object_init(msgpack_object* d, void *data, size_t size, int type)
+{
+    d->type = type;
+    switch (type) {
+    case MSGPACK_OBJECT_STR:
+        {
+            d->via.str.ptr = (char *)data;
+            d->via.str.size = size;
+            break;
+        }
+    case MSGPACK_OBJECT_BIN:
+        {
+            d->type = type;
+            d->via.bin.ptr = (char *)data;
+            d->via.bin.size = size;
+            break;
+        }
+    case MSGPACK_OBJECT_ARRAY:
+        {
+            d->via.array.ptr = (msgpack_object *)data;
+            d->via.array.size = size;
+            break;
+        }
+    case MSGPACK_OBJECT_MAP:
+        {
+            d->via.map.ptr = (msgpack_object_kv *) data;
+            d->via.map.size = size;
+            break;
+        }
+    default:
+        {
+            // Other types are not supported and need to be initialized manually.
+            d->type = MSGPACK_OBJECT_NIL;
+            return -1;
+        }
+    }
+    return 0;
+
+}
+
 #if !defined(_KERNEL_MODE)
 
 static void msgpack_object_bin_print(FILE* out, const char *ptr, size_t size)
