@@ -125,9 +125,8 @@ int msgpack_pack_object(msgpack_packer* pk, msgpack_object d)
     }
 }
 
-int msgpack_object_init(msgpack_object* d, void *data, size_t size, int type)
+bool msgpack_object_init(msgpack_object* d, int type, void* data, size_t size)
 {
-    d->type = type;
     switch (type) {
     case MSGPACK_OBJECT_STR:
         {
@@ -149,19 +148,18 @@ int msgpack_object_init(msgpack_object* d, void *data, size_t size, int type)
         }
     case MSGPACK_OBJECT_MAP:
         {
-            d->via.map.ptr = (msgpack_object_kv *) data;
+            d->via.map.ptr = (msgpack_object_kv *)data;
             d->via.map.size = size;
             break;
         }
     default:
         {
             // Other types are not supported and need to be initialized manually.
-            d->type = MSGPACK_OBJECT_NIL;
-            return -1;
+            return false;
         }
     }
-    return 0;
-
+    d->type = type;
+    return true;
 }
 
 #if !defined(_KERNEL_MODE)
