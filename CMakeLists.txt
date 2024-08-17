@@ -8,6 +8,11 @@ else()
     ENDIF ()
 endif()
 
+IF ((CMAKE_VERSION VERSION_GREATER 3.27) OR
+    (CMAKE_VERSION VERSION_EQUAL 3.27))
+    CMAKE_POLICY(SET CMP0145 OLD)
+ENDIF ()
+
 OPTION (MSGPACK_BUILD_TESTS "Build msgpack tests." OFF)
 OPTION (MSGPACK_GEN_COVERAGE "Enable running gcov to get a test coverage report." OFF)
 
