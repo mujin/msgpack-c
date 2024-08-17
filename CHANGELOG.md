@@ -1,3 +1,7 @@
+# 2024-08-17 version 6.1.0
+  * Add object initializer functions (#1137)
+  * Fix cmake warnings (#1133, #1137)
+
 # 2024-06-24 version 6.0.2
   * Fix header file installation to respect `CMAKE_INSTALL_INCLUDEDIR` (#1125)
   * Support absolute path for `CMAKE_INSTALL_*DIR` (#1121)
